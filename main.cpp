@@ -80,7 +80,7 @@ class TextFile {
  public:
   TextFile() = delete;
 
-  TextFile(char *path) {
+  TextFile(const char *path) {
     int fd = open(path, O_RDONLY);
     if (fd == -1) {
       throw FileException(); // TODO: ДОБАВИТЬ ОПИСАНИЕ ОШИБКИ : ERRNO + STRERROR
@@ -242,7 +242,7 @@ class TaskSolver {
 
   TaskSolver() = delete;
 
-  explicit TaskSolver(char* path) : text_file_(path) {
+  explicit TaskSolver(const char* path_input, const char* path_output1, const char* path_output2) : text_file_(path_input) {
     text_file_.Sort(Compare);
     text_file_.WriteToFile(PATH_OUTPUT1);
 
@@ -259,6 +259,6 @@ class TaskSolver {
 };
 
 int main() {
-  TaskSolver task_solver(PATH_INPUT);
+  TaskSolver task_solver(PATH_INPUT, PATH_OUTPUT1, PATH_OUTPUT2);
   return 0;
 }
